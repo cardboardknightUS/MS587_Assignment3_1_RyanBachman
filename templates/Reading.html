@@ -1,0 +1,84 @@
+<!-- Ryan Bachman
+     University of Advancing Technology
+     MS587, Databases and Web Development
+     Summer 2024, Grad 1
+     Assignment 3.1 - Your eBook and Audiobook Web Application with Flask -->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head> <!-- Create the heading details of the page, including settings content widths and adding stylesheets -->
+        <title>Reading Page</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/stylesheets.css') }}">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        <!-- Navbar -->
+        <!-- Creates the navigation bar. This will change colors dependent on the page the user has selected. -->
+        <div id="top">
+            <div class="rb-top">
+              <div class="rb-bar rb-blue rb-card rb-left-align rb-large">
+                <a class="rb-bar-item rb-button rb-hide-medium rb-hide-large rb-right rb-padding-large rb-hover-white rb-large rb-blue" href="javascript:void(0);" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+                <a href="/" class="rb-bar-item rb-button rb-hide-small rb-padding-large rb-hover-white">Home</a>
+                <a href="/second" class="rb-bar-item rb-button rb-padding-large rb-white">Book Catalogue</a>
+                  <a href="/third" class="rb-bar-item rb-button rb-hide-small rb-padding-large rb-hover-white">References</a>
+              </div>
+
+
+              <!-- Navbar on small screens -->
+              <div id="navDemo" class="rb-bar-block rb-white rb-hide rb-hide-large rb-hide-medium rb-large">
+                <a href="/second" class="rb-bar-item rb-button rb-padding-large">Book Catalogue</a>
+                  <a href="/third" class="rb-bar-item rb-button rb-padding-large">References</a>
+              </div>
+            </div>
+        </div>
+        <!-- Header -->
+        <!-- Differs from HEAD. This is a header field that shows the website overall name and my details. -->
+        <header class="rb-container rb-blue rb-center" style="padding:30px 4px 4px 4px">
+          <h1 class="rb-margin rb-jumbo">Your eBook and Audiobook Web Application with Flask</h1>
+          <p class="rb-xlarge">Ryan Bachman, MS587</p>
+        </header>
+
+        <!-- First Grid -->
+        <!-- Uses a grid format so that the image can be on the right and the text can be on the left. -->
+        <div id="bot">
+            <div class="rb-row-padding rb-padding-64 rb-container">
+              <div class="rb-content">
+                <div class="rb-twothird">
+                  <h1>Available Books to Read</h1>
+
+                  <div class = "item" id = "bot">  <!-- The below uses a loop to go through the books database and puts all book details on the page. Also generates the link to the specific book. -->
+                      <ul>
+                          {% for book in books %}
+                            <li>{{ book.book_id }}, {{ book.book_name }}</li>
+                              <ul>
+                                <li>{{ book.book_genre }}</li>
+                                <li>{{ book.book_summary }}</li>
+                                <li><a href="{{  url_for('ereader_page', book_id=book.book_id) }}" class="rb-book-page-link rb-book-page-link:hover">Go to Book Page</a></li>
+                              </ul>
+                          {% endfor %}
+                      </ul>
+                  </div>
+                </div>
+
+                <div class="rb-third rb-center">
+                    <img src="/static/image/image_fx_book_cover_text_that_says_the_shattered_all.jpg" alt="Man shopping online, cartoon style" width="200" height="200" style="margin-top: 100px;margin-left: 160px">
+                    <img src="/static/image/image_fx_change_war_of_the_cosmas_to_war_of_the_cos.jpg" alt="Man shopping online, cartoon style" width="200" height="200" style="margin-top: 50px;margin-left: 160px">
+                    <img src="/static/image/image_fx_book_with_text_that_says_the_temple_of_shado.jpg" alt="Man shopping online, cartoon style" width="200" height="200" style="margin-top: 50px;margin-left: 160px">
+                    <img src="/static/image/image_fx_book_with_text_that_says__shadows_of_diploma.jpg" alt="Man shopping online, cartoon style" width="200" height="200" style="margin-top: 50px;margin-left: 160px">
+                    <img src="/static/image/image_fx_book_with_text_that_says_fangs__fur_a_love.jpg" alt="Man shopping online, cartoon style" width="200" height="200" style="margin-top: 50px;margin-left: 160px">
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <!-- Creates a small footer at the bottom of the page with my name and class details. -->
+        <footer class="rb-container rb-padding-64 rb-center rb-opacity">
+         <p>Ryan Bachman, University of Advancing Technology, MS587, Databases and Web Development</p>
+        </footer>
+    </body>
+</html>

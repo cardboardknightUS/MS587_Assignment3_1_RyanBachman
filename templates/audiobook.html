@@ -1,0 +1,77 @@
+<!-- Ryan Bachman
+     University of Advancing Technology
+     MS587, Databases and Web Development
+     Summer 2024, Grad 1
+     Assignment 3.1 - Your eBook and Audiobook Web Application with Flask -->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head> <!-- Create the heading details of the page, including settings content widths and adding stylesheets -->
+        <title>{{ book_name }}</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/stylesheets.css') }}">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        <!-- Navbar -->
+        <!-- Creates the navigation bar. This will change colors dependent on the page the user has selected. -->
+        <div class="rb-top top">
+          <div class="rb-bar rb-blue rb-card rb-left-align rb-large">
+            <a class="rb-bar-item rb-button rb-hide-medium rb-hide-large rb-right rb-padding-large rb-hover-white rb-large rb-blue" href="javascript:void(0);" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+            <a href="/" class="rb-bar-item rb-button rb-hide-small rb-padding-large rb-hover-white">Home</a>
+            <a href="/second" class="rb-bar-item rb-button rb-padding-large rb-white">Book Catalogue</a>
+              <a href="/third" class="rb-bar-item rb-button rb-hide-small rb-padding-large rb-hover-white">References</a>
+          </div>
+
+
+          <!-- Navbar on small screens -->
+          <div id="navDemo" class="rb-bar-block rb-white rb-hide rb-hide-large rb-hide-medium rb-large">
+            <a href="/second" class="rb-bar-item rb-button rb-padding-large">Book Catalogue</a>
+              <a href="/third" class="rb-bar-item rb-button rb-padding-large">References</a>
+          </div>
+        </div>
+
+        <!-- Header -->
+        <!-- Differs from HEAD. This is a header field that shows the website overall name and my details. -->
+        <header class="rb-container rb-blue rb-center" style="padding:30px 4px 4px 4px">
+          <h1 class="rb-margin rb-jumbo">Your eBook and Audiobook Web Application with Flask</h1>
+          <p class="rb-xlarge">Ryan Bachman, MS587</p>
+        </header>
+
+        <!-- First Grid -->
+        <!-- Uses a grid format so that the image can be on the right and the text can be on the left. -->
+        <div class="rb-row-padding rb-padding-64 rb-container">
+          <div class="rb-content">
+            <div class="rb-twothird">
+                <div class="item">  <!-- The below uses a nested loop to go through the books database and puts the book name and text on the page. -->
+                    {% for details in book_details %}
+                        {% for book in books %}
+                            <h1>{{ book.book_name }}</h1>
+                            <p class="rb-text-grey">{{ details.book_text }}</p>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="rb-third rb-center">  <!-- Adds the below buttons that link with app.py to run the python functions to download and start the audiobook. -->
+                {% for details in book_details %}
+                    {% for book in books %}
+                        <p><a href="{{  url_for('download_book', book_id=book.book_id) }}">Download eBook</a></p>
+                        <p><a href="{{  url_for('audio_start', book_id=book.book_id) }}">Play Audiobook</a></p>
+                        <p><a href="{{  url_for('audio_download', book_id=book.book_id) }}">Download Audiobook (MP3)</a></p>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <!-- Creates a small footer at the bottom of the page with my name and class details. -->
+        <footer class="rb-container rb-padding-64 rb-center rb-opacity">
+         <p>Ryan Bachman, University of Advancing Technology, MS587, Databases and Web Development</p>
+        </footer>
+    </body>
+</html>

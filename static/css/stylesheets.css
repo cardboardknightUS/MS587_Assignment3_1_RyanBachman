@@ -1,0 +1,1780 @@
+/*   Ryan Bachman
+     University of Advancing Technology
+     MS587, Databases and Web Development
+     Summer 2024, Grad 1
+     Assignment 3.1 - Building Your Own eBook and Audiobook Web Application
+*/
+
+/* stylesheets.CSS base I used (and edited/learned from) from https://www.w3schools.com/w3css/tryit.asp?filename=tryw3css_templates_start_page&stacked=h */
+html{
+    box-sizing:border-box; /* Sets how the total width and height of an element is calculated. */
+    -ms-text-size-adjust:100%; /* Controls the text inflation algorithm used on some smartphones and tablets. Other browsers will ignore this property. */
+    -webkit-text-size-adjust:100% /* Controls the text inflation algorithm used on some smartphones and tablets. Other browsers will ignore this property. */
+}
+
+*,*:before,*:after{
+    box-sizing:inherit /* Sets how the total width and height of an element is calculated. */
+}
+
+body{
+    margin:0 /* Sets the margin area on all four sides of an element. */
+}
+
+article,aside,details,figcaption,figure,footer,header,main,menu,nav,section{
+    display:block /* Sets whether an element is treated as a block or inline box and the layout used for its children, such as flow layout, grid or flex. */
+}
+
+p {
+    font-size: 16px; /* Sets the size of the font for this section. */
+}
+
+imgTxt {
+    font-size: 12px; /* Sets the size of the font for this section. */
+    text-align: center; /* Aligns the text within the section. */
+}
+
+summary{
+    display:list-item/* Sets whether an element is treated as a block or inline box and the layout used for its children, such as flow layout, grid or flex. */
+}
+
+audio,canvas,progress,video{
+    display:inline-block/* Sets whether an element is treated as a block or inline box and the layout used for its children, such as flow layout, grid or flex. */
+}
+
+progress{
+    vertical-align:baseline /* Aligns things vertically within the section. */
+}
+
+audio:not([controls]){
+    display:none; /* Sets whether an element is treated as a block or inline box and the layout used for its children, such as flow layout, grid or flex. */
+    height:0 /* Manually set the height of the element. */
+}
+
+[hidden],template{
+    display:none /* Sets whether an element is treated as a block or inline box and the layout used for its children, such as flow layout, grid or flex. */
+}
+
+#top a {
+    background-color:transparent; /* Set the color of the background of the element. */
+}
+
+#top a:active,a:hover {
+    outline-width:0; /* Sets the width of the outline of the element. */
+}
+
+#bot a {
+    background-color:transparent; /* Set the color of the background of the element. */
+    color: #2196F3 !important /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+}
+
+#bot a:active,a:hover {
+    outline-width:0; /* Sets the width of the outline of the element. */
+    color: #000 !important /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+}
+
+abbr[title] {
+    border-bottom: none; /* Sets an element's bottom borders width, style and color. */
+    text-decoration: underline; /* Sets the appearance of decorative lines on text. This means the underlines, color, style and thickness. */
+    text-decoration: underline dotted /* Sets the appearance of decorative lines on text. This means the underlines, color, style and thickness. */
+}
+
+b, strong {
+    font-weight: bolder /* Sets the weight of the font, meaning the boldness of the text. */
+}
+
+dfn {
+    font-style: italic /* Sets the style of the font. Italicized, normal or oblique. */
+}
+
+mark {
+    background: #ff0; /* Sets all background style properties at once, such as color, image, origin and size, or repeat method. */
+    color: #000 /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+}
+
+small {
+    font-size: 80% /* Sets the size of the font. */
+}
+
+sub, sup {
+    font-size: 75%; /* Sets the size of the font. */
+    line-height: 0; /* Manually set the height of the element. */
+    position: relative; /* Sets how an element is positioned in a document. */
+    vertical-align: baseline /* Aligns things vertically within the section. */
+}
+
+sub {
+    bottom: -0.25em /* Participates in setting the vertical position of a positioned element. */
+}
+
+sup {
+    top: -0.5em /* Sets the vertical position of a positioned element. */
+}
+
+figure {
+    margin: 1em 40px /* Sets the margin area on all four sides of an element. */
+}
+
+img {
+    border-style: none /* Sets the line style for all four sides of an element's border. */
+}
+
+code, kbd, pre, samp {
+    font-family: monospace, monospace; /* Specifies a prioritized list of one or more font family names and/or generic family names for the selected element. */
+    font-size: 1em /* Sets the size of the font. */
+}
+
+hr {
+    box-sizing: content-box; /* Sets how the total width and height of an element is calculated. */
+    height: 0; /* Manually set the height of the element. */
+    overflow: visible /* Sets the desired behavior when content does not fit in the element's padding box (overflows) in the horizontal and/or vertical direction. */
+}
+
+button, input, select, textarea, optgroup {
+    font: inherit; /* Sets all the different properties of an element's font. Alternatively, it sets an element's font to a system font. */
+    margin: 0 /* Sets the margin area on all four sides of an element. */
+}
+
+optgroup {
+    font-weight: bold /* Sets the weight of the font, meaning the boldness of the text. */
+}
+
+button, input {
+    overflow: visible /* Sets the desired behavior when content does not fit in the element's padding box (overflows) in the horizontal and/or vertical direction. */
+}
+
+button, select {
+    text-transform: none /* Specifies how to capitalize an element's text. It can be used to make text appear in all-uppercase or all-lowercase, or with each word capitalized. */
+}
+
+button, [type=button], [type=reset], [type=submit] {
+    -webkit-appearance: button /* Sets the appearance for buttons as the default appearance. */
+}
+
+button::-moz-focus-inner, [type=button]::-moz-focus-inner, [type=reset]::-moz-focus-inner, [type=submit]::-moz-focus-inner {
+    border-style: none; /* Sets the line style for all four sides of an element's border. */
+    padding: 0 /* Sets the padding area on all four sides of an element at once. */
+}
+
+button:-moz-focusring, [type=button]:-moz-focusring, [type=reset]:-moz-focusring, [type=submit]:-moz-focusring {
+    outline: 1px dotted ButtonText /* Sets most of the outline properties in a single declaration. */
+}
+
+fieldset {
+    border: 1px solid #c0c0c0; /* Sets an element's border width, style and color. */
+    margin: 0 2px; /* Sets the margin area on all four sides of an element. */
+    padding: .35em .625em .75em /* Sets the padding area on all four sides of an element at once. */
+}
+
+legend {
+    color: inherit; /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+    display: table;/* Sets whether an element is treated as a block or inline box and the layout used for its children, such as flow layout, grid or flex. */
+    max-width: 100%; /* Sets the maximum width of the element. */
+    padding: 0; /* Sets the padding area on all four sides of an element at once. */
+    white-space: normal /* Sets how white space inside an element is handled. */
+}
+
+textarea {
+    overflow: auto /* Sets the desired behavior when content does not fit in the element's padding box (overflows) in the horizontal and/or vertical direction. */
+}
+
+[type=checkbox], [type=radio] {
+    padding: 0 /* Sets the padding area on all four sides of an element at once. */
+}
+
+[type=number]::-webkit-inner-spin-button, [type=number]::-webkit-outer-spin-button {
+    height: auto /* Manually set the height of the element. */
+}
+
+[type=search] {
+    -webkit-appearance: textfield; /* Sets the appearance for text fields as the default appearance. */
+    outline-offset: -2px /* Sets the amount of space between an outline and the edge or border of an element. */
+}
+
+[type=search]::-webkit-search-decoration {
+    -webkit-appearance: none /* Sets the default appearance for search functions. */
+}
+
+::-webkit-file-upload-button {
+    -webkit-appearance: button; /* Sets the appearance for buttons as the default appearance. */
+    font: inherit /* Sets all the different properties of an element's font. Alternatively, it sets an element's font to a system font. */
+}
+
+html, body {
+    font-family: Verdana, sans-serif; /* Specifies a prioritized list of one or more font family names and/or generic family names for the selected element. */
+    font-size: 15px; /* Sets the size of the font for this section. */
+    line-height: 1.5 /* Manually set the height of the element. */
+}
+
+html {
+    overflow-x: hidden /* Sets what shows when content overflows a block-level element's left and right edges. */
+}
+
+h1 {
+    font-size: 36px /* Sets the size of the font for this section. */
+}
+
+h2 {
+    font-size: 30px /* Sets the size of the font for this section. */
+}
+
+h3 {
+    font-size: 24px /* Sets the size of the font for this section. */
+}
+
+h4 {
+    font-size: 20px /* Sets the size of the font for this section. */
+}
+
+h5 {
+    font-size: 18px /* Sets the size of the font for this section. */
+}
+
+h6 {
+    font-size: 16px /* Sets the size of the font for this section. */
+}
+
+.rb-serif {
+    font-family: serif /* Specifies a prioritized list of one or more font family names and/or generic family names for the selected element. */
+}
+
+.rb-sans-serif {
+    font-family: sans-serif /* Specifies a prioritized list of one or more font family names and/or generic family names for the selected element. */
+}
+
+.rb-cursive {
+    font-family: cursive /* Specifies a prioritized list of one or more font family names and/or generic family names for the selected element. */
+}
+
+.rb-monospace {
+    font-family: monospace /* Specifies a prioritized list of one or more font family names and/or generic family names for the selected element. */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Segoe UI", Arial, sans-serif; /* Specifies a prioritized list of one or more font family names and/or generic family names for the selected element. */
+    font-weight: 400; /* Sets the weight of the font, meaning the boldness of the text. */
+    margin: 10px 0 /* Sets the margin area on all four sides of an element. */
+}
+
+.rb-wide {
+    letter-spacing: 4px /* Sets the spacing of each of the letters within the element. */
+}
+
+hr {
+    border: 0; /* Sets an element's border width, style and color. */
+    border-top: 1px solid #eee; /* Sets all the properties of an element's top border. */
+    margin: 20px 0 /* Sets the margin area on all four sides of an element. */
+}
+
+.rb-image {
+    max-width: 100%; /* Sets the maximum width of the element. */
+    height: auto /* Manually set the height of the element. */
+}
+
+img {
+    vertical-align: middle /* Aligns things vertically within the section. */
+}
+
+a {
+    color: inherit /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+}
+
+.rb-table, .rb-table-all {
+    border-collapse: collapse; /* Sets whether cells inside a <table> have shared or separate borders. */
+    border-spacing: 0; /* Sets the distance between the borders of adjacent cells in a <table>. This property applies only when border-collapse is separate. */
+    width: 100%; /* Sets an element's width. */
+    display: table/* Sets whether an element is treated as a block or inline box and the layout used for its children, such as flow layout, grid or flex. */
+}
+
+.rb-table-all {
+    border: 1px solid #ccc /* Sets an element's border width, style and color. */
+}
+
+.rb-bordered tr, .rb-table-all tr {
+    border-bottom: 1px solid #ddd /* Sets an element's bottom borders width, style and color. */
+}
+
+.rb-striped tbody tr:nth-child(even) {
+    background-color: #f1f1f1 /* Set the color of the background of the element. */
+}
+
+.rb-table-all tr:nth-child(odd) {
+    background-color: #fff /* Set the color of the background of the element. */
+}
+
+.rb-table-all tr:nth-child(even) {
+    background-color: #f1f1f1 /* Set the color of the background of the element. */
+}
+
+.rb-hoverable tbody tr:hover, .rb-ul.rb-hoverable li:hover {
+    background-color: #ccc /* Set the color of the background of the element. */
+}
+
+.rb-centered tr th, .rb-centered tr td {
+    text-align: center /* Aligns the text within the section. */
+}
+
+.rb-table td, .rb-table th, .rb-table-all td, .rb-table-all th {
+    padding: 8px 8px; /* Sets the padding area on all four sides of an element at once. */
+    display: table-cell; /* Sets whether an element is treated as a block or inline box and the layout used for its children, such as flow layout, grid or flex. */
+    text-align: left; /* Aligns the text within the section. */
+    vertical-align: top /* Aligns things vertically within the section. */
+}
+
+.rb-table th:first-child, .rb-table td:first-child, .rb-table-all th:first-child, .rb-table-all td:first-child {
+    padding-left: 16px /* Sets the width of the padding area to the left of an element. */
+}
+
+.rb-btn, .rb-button {
+    border: none; /* Sets an element's border width, style and color. */
+    display: inline-block;/* Sets whether an element is treated as a block or inline box and the layout used for its children, such as flow layout, grid or flex. */
+    padding: 8px 16px; /* Sets the padding area on all four sides of an element at once. */
+    vertical-align: middle; /* Aligns things vertically within the section. */
+    overflow: hidden; /* Sets the desired behavior when content does not fit in the element's padding box (overflows) in the horizontal and/or vertical direction. */
+    text-decoration: none; /* Sets the appearance of decorative lines on text. This means the underlines, color, style and thickness. */
+    color: inherit; /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+    background-color: inherit; /* Set the color of the background of the element. */
+    text-align: center; /* Aligns the text within the section. */
+    cursor: pointer; /* Sets the cursor style within the element. */
+    white-space: nowrap /* Sets how white space inside an element is handled. */
+}
+
+.rb-btn:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) /* Adds shadow effects around an element's frame. */
+}
+
+.rb-btn, .rb-button {
+    -webkit-touch-callout: none; /* Controls the display of the default callout shown when you touch and hold a touch target. */
+    -webkit-user-select: none; /* Controls whether the user can select text. */
+    -khtml-user-select: none; /* Controls whether the user can select text. */
+    -moz-user-select: none; /* Controls whether the user can select text. */
+    -ms-user-select: none; /* Controls whether the user can select text. */
+    user-select: none /* Controls whether the user can select text. */
+}
+
+.rb-disabled, .rb-btn:disabled, .rb-button:disabled {
+    cursor: not-allowed; /* Sets the cursor style within the element. */
+    opacity: 0.3 /* Sets the opacity of an element (how see-through it is). */
+}
+
+.rb-disabled *, :disabled * {
+    pointer-events: none /* Sets under what circumstances (if any) a particular graphic element can become the target of pointer events. */
+}
+
+.rb-btn.rb-disabled:hover, .rb-btn:disabled:hover {
+    box-shadow: none /* Adds shadow effects around an element's frame. */
+}
+
+.rb-badge, .rb-tag {
+    background-color: #000; /* Set the color of the background of the element. */
+    color: #fff; /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+    display: inline-block;/* Sets whether an element is treated as a block or inline box and the layout used for its children, such as flow layout, grid or flex. */
+    padding-left: 8px; /* Sets the width of the padding area to the left of an element. */
+    padding-right: 8px; /* Sets the width of the padding area to the right of an element. */
+    text-align: center /* Aligns the text within the section. */
+}
+
+.rb-badge {
+    border-radius: 50% /* Rounds the corners of an element's outer border edge. */
+}
+
+.rb-ul {
+    list-style-type: none; /* Sets the marker (such as a disc, character, or custom counter style) of a list item element. */
+    padding: 0; /* Sets the padding area on all four sides of an element at once. */
+    margin: 0 /* Sets the margin area on all four sides of an element. */
+}
+
+.rb-ul li {
+    padding: 8px 16px; /* Sets the padding area on all four sides of an element at once. */
+    border-bottom: 1px solid #ddd /* Sets an element's bottom borders width, style and color. */
+}
+
+.rb-ul li:last-child {
+    border-bottom: none /* Sets an element's bottom borders width, style and color. */
+}
+
+.rb-tooltip, .rb-display-container {
+    position: relative /* Sets how an element is positioned in a document. */
+}
+
+.rb-tooltip .rb-text {
+    display: none/* Sets whether an element is treated as a block or inline box and the layout used for its children, such as flow layout, grid or flex. */
+}
+
+.rb-tooltip:hover .rb-text {
+    display: inline-block/* Sets whether an element is treated as a block or inline box and the layout used for its children, such as flow layout, grid or flex. */
+}
+
+.rb-ripple:active {
+    opacity: 0.5 /* Sets the opacity of an element (how see-through it is). */
+}
+
+.rb-ripple {
+    transition: opacity 0s /* Shorthand property for transition-property, transition-duration, transition-timing-function, transition-delay, and transition-behavior. */
+}
+
+.rb-input {
+    padding: 8px; /* Sets the padding area on all four sides of an element at once. */
+    display: block;/* Sets whether an element is treated as a block or inline box and the layout used for its children, such as flow layout, grid or flex. */
+    border: none; /* Sets an element's border width, style and color. */
+    border-bottom: 1px solid #ccc; /* Sets an element's bottom borders width, style and color. */
+    width: 100% /* Sets an element's width. */
+}
+
+.rb-select {
+    padding: 9px 0; /* Sets the padding area on all four sides of an element at once. */
+    width: 100%; /* Sets an element's width. */
+    border: none; /* Sets an element's border width, style and color. */
+    border-bottom: 1px solid #ccc /* Sets an element's bottom borders width, style and color. */
+}
+
+.rb-dropdown-click, .rb-dropdown-hover {
+    position: relative; /* Sets how an element is positioned in a document. */
+    display: inline-block;/* Sets whether an element is treated as a block or inline box and the layout used for its children, such as flow layout, grid or flex. */
+    cursor: pointer /* Sets the cursor style within the element. */
+}
+
+.rb-dropdown-hover:hover .rb-dropdown-content {
+    display: block/* Sets whether an element is treated as a block or inline box and the layout used for its children, such as flow layout, grid or flex. */
+}
+
+.rb-dropdown-hover:first-child, .rb-dropdown-click:hover {
+    background-color: #ccc; /* Set the color of the background of the element. */
+    color: #000 /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+}
+
+.rb-dropdown-hover:hover > .rb-button:first-child, .rb-dropdown-click:hover > .rb-button:first-child {
+    background-color: #ccc; /* Set the color of the background of the element. */
+    color: #000 /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+}
+
+.rb-dropdown-content {
+    cursor: auto; /* Sets the cursor style within the element. */
+    color: #000; /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+    background-color: #fff; /* Set the color of the background of the element. */
+    display: none;/* Sets whether an element is treated as a block or inline box and the layout used for its children, such as flow layout, grid or flex. */
+    position: absolute; /* Sets how an element is positioned in a document. */
+    min-width: 160px; /* Sets the minimum width of an element. */
+    margin: 0; /* Sets the margin area on all four sides of an element. */
+    padding: 0; /* Sets the padding area on all four sides of an element at once. */
+    z-index: 1 /* Sets the z-order of a positioned element and its descendants or flex and grid items. Overlapping elements with a larger z-index cover those with a smaller one. */
+}
+
+.rb-check, .rb-radio {
+    width: 24px; /* Sets an element's width. */
+    height: 24px; /* Manually set the height of the element. */
+    position: relative; /* Sets how an element is positioned in a document. */
+    top: 6px /* Sets the vertical position of a positioned element. */
+}
+
+.rb-sidebar {
+    height: 100%; /* Manually set the height of the element. */
+    width: 200px; /* Sets an element's width. */
+    background-color: #fff; /* Set the color of the background of the element. */
+    position: fixed !important; /* Sets how an element is positioned in a document. */
+    z-index: 1; /* Sets the z-order of a positioned element and its descendants or flex and grid items. Overlapping elements with a larger z-index cover those with a smaller one. */
+    overflow: auto /* Sets the desired behavior when content does not fit in the element's padding box (overflows) in the horizontal and/or vertical direction. */
+}
+
+.rb-bar-block .rb-dropdown-hover, .rb-bar-block .rb-dropdown-click {
+    width: 100% /* Sets an element's width. */
+}
+
+.rb-bar-block .rb-dropdown-hover .rb-dropdown-content, .rb-bar-block .rb-dropdown-click .rb-dropdown-content {
+    min-width: 100% /* Sets the minimum width of an element. */
+}
+
+.rb-bar-block .rb-dropdown-hover .rb-button, .rb-bar-block .rb-dropdown-click .rb-button {
+    width: 100%; /* Sets an element's width. */
+    text-align: left; /* Aligns the text within the section. */
+    padding: 8px 16px /* Sets the padding area on all four sides of an element at once. */
+}
+
+.rb-main, #main {
+    transition: margin-left .4s /* Shorthand property for transition-property, transition-duration, transition-timing-function, transition-delay, and transition-behavior. */
+}
+
+.rb-modal {
+    z-index: 3; /* Sets the z-order of a positioned element and its descendants or flex and grid items. Overlapping elements with a larger z-index cover those with a smaller one. */
+    display: none;/* Sets whether an element is treated as a block or inline box and the layout used for its children, such as flow layout, grid or flex. */
+    padding-top: 100px; /* Sets the height of the padding area on the top of an element. */
+    position: fixed; /* Sets how an element is positioned in a document. */
+    left: 0; /* Participates in specifying the horizontal position of a positioned element. */
+    top: 0; /* Sets the vertical position of a positioned element. */
+    width: 100%; /* Sets an element's width. */
+    height: 100%; /* Manually set the height of the element. */
+    overflow: auto; /* Sets the desired behavior when content does not fit in the element's padding box (overflows) in the horizontal and/or vertical direction. */
+    background-color: rgb(0, 0, 0); /* Set the color of the background of the element. */
+    background-color: rgba(0, 0, 0, 0.4) /* Set the color of the background of the element. */
+}
+
+.rb-modal-content {
+    margin: auto; /* Sets the margin area on all four sides of an element. */
+    background-color: #fff; /* Set the color of the background of the element. */
+    position: relative; /* Sets how an element is positioned in a document. */
+    padding: 0; /* Sets the padding area on all four sides of an element at once. */
+    outline: 0; /* Sets most of the outline properties in a single declaration. */
+    width: 600px /* Sets an element's width. */
+}
+
+.rb-bar {
+    width: 100%; /* Sets an element's width. */
+    overflow: hidden /* Sets the desired behavior when content does not fit in the element's padding box (overflows) in the horizontal and/or vertical direction. */
+}
+
+.rb-center .rb-bar {
+    display: inline-block;/* Sets whether an element is treated as a block or inline box and the layout used for its children, such as flow layout, grid or flex. */
+    width: auto; /* Sets an element's width. */
+    height: 100%; /* Sets an element's height. */
+    vertical-align: middle /* Vertically align to the middle of the element. */
+}
+
+.rb-bar .rb-bar-item {
+    padding: 8px 16px; /* Sets the padding area on all four sides of an element at once. */
+    float: left; /* Places an element on the left or right side of its container, allowing text and inline elements to wrap around it. */
+    width: auto; /* Sets an element's width. */
+    border: none; /* Sets an element's border width, style and color. */
+    display: block;/* Sets whether an element is treated as a block or inline box and the layout used for its children, such as flow layout, grid or flex. */
+    outline: 0 /* Sets most of the outline properties in a single declaration. */
+}
+
+.rb-bar .rb-dropdown-hover, .rb-bar .rb-dropdown-click {
+    position: static; /* Sets how an element is positioned in a document. */
+    float: left /* Places an element on the left or right side of its container, allowing text and inline elements to wrap around it. */
+}
+
+.rb-bar .rb-button {
+    white-space: normal /* Sets how white space inside an element is handled. */
+}
+
+.rb-bar-block .rb-bar-item {
+    width: 100%; /* Sets an element's width. */
+    display: block;/* Sets whether an element is treated as a block or inline box and the layout used for its children, such as flow layout, grid or flex. */
+    padding: 8px 16px; /* Sets the padding area on all four sides of an element at once. */
+    text-align: left; /* Aligns the text within the section. */
+    border: none; /* Sets an element's border width, style and color. */
+    white-space: normal; /* Sets how white space inside an element is handled. */
+    float: none; /* Places an element on the left or right side of its container, allowing text and inline elements to wrap around it. */
+    outline: 0 /* Sets most of the outline properties in a single declaration. */
+}
+
+.rb-bar-block.rb-center .rb-bar-item {
+    text-align: center /* Aligns the text within the section. */
+}
+
+.rb-block {
+    display: block; /* Sets whether an element is treated as a block or inline box and the layout used for its children, such as flow layout, grid or flex. */
+    width: 100% /* Sets an element's width. */
+}
+
+.rb-responsive {
+    display: block;/* Sets whether an element is treated as a block or inline box and the layout used for its children, such as flow layout, grid or flex. */
+    overflow-x: auto /* Sets what shows when content overflows a block-level element's left and right edges. */
+}
+
+.rb-container:after, .rb-container:before, .rb-panel:after, .rb-panel:before, .rb-row:after, .rb-row:before, .rb-row-padding:after, .rb-row-padding:before,
+.rb-cell-row:before, .rb-cell-row:after, .rb-clear:after, .rb-clear:before, .rb-bar:before, .rb-bar:after {
+    content: ""; /* Replaces content with a generated value. It can be used to define what is rendered inside an element or pseudo-element. */
+    display: table;/* Sets whether an element is treated as a block or inline box and the layout used for its children, such as flow layout, grid or flex. */
+    clear: both /* Sets whether an element must be moved below (cleared) floating elements that precede it. The clear property applies to floating and non-floating elements. */
+}
+
+.rb-col, .rb-half, .rb-third, .rb-twothird, .rb-threequarter, .rb-quarter {
+    float: left; /* Places an element on the left or right side of its container, allowing text and inline elements to wrap around it. */
+    width: 100%; /* Sets an element's width. */
+}
+
+.rb-col.s1 {
+    width: 8.33333% /* Sets an element's width. */
+}
+
+.rb-col.s2 {
+    width: 16.66666% /* Sets an element's width. */
+}
+
+.rb-col.s3 {
+    width: 24.99999% /* Sets an element's width. */
+}
+
+.rb-col.s4 {
+    width: 33.33333% /* Sets an element's width. */
+}
+
+.rb-col.s5 {
+    width: 41.66666% /* Sets an element's width. */
+}
+
+.rb-col.s6 {
+    width: 49.99999% /* Sets an element's width. */
+}
+
+.rb-col.s7 {
+    width: 58.33333% /* Sets an element's width. */
+}
+
+.rb-col.s8 {
+    width: 66.66666% /* Sets an element's width. */
+}
+
+.rb-col.s9 {
+    width: 74.99999% /* Sets an element's width. */
+}
+
+.rb-col.s10 {
+    width: 83.33333% /* Sets an element's width. */
+}
+
+.rb-col.s11 {
+    width: 91.66666% /* Sets an element's width. */
+}
+
+.rb-col.s12 {
+    width: 99.99999% /* Sets an element's width. */
+}
+
+@media (min-width: 601px) { /* Sets the minimum width of a media element. */
+    .rb-col.m1 {
+        width: 8.33333% /* Sets an element's width. */
+    }
+
+    .rb-col.m2 {
+        width: 16.66666% /* Sets an element's width. */
+    }
+
+    .rb-col.m3, .rb-quarter {
+        width: 24.99999% /* Sets an element's width. */
+    }
+
+    .rb-col.m4, .rb-third {
+        width: 33.33333% /* Sets an element's width. */
+    }
+
+    .rb-col.m5 {
+        width: 41.66666% /* Sets an element's width. */
+    }
+
+    .rb-col.m6, .rb-half {
+        width: 49.99999% /* Sets an element's width. */
+    }
+
+    .rb-col.m7 {
+        width: 58.33333% /* Sets an element's width. */
+    }
+
+    .rb-col.m8, .rb-twothird {
+        width: 66.66666% /* Sets an element's width. */
+    }
+
+    .rb-col.m9, .rb-threequarter {
+        width: 74.99999% /* Sets an element's width. */
+    }
+
+    .rb-col.m10 {
+        width: 83.33333% /* Sets an element's width. */
+    }
+
+    .rb-col.m11 {
+        width: 91.66666% /* Sets an element's width. */
+    }
+
+    .rb-col.m12 {
+        width: 99.99999% /* Sets an element's width. */
+    }
+}
+
+@media (min-width: 993px) { /* Sets the minimum width of a media element. */
+    .rb-col.l1 {
+        width: 8.33333% /* Sets an element's width. */
+    }
+
+    .rb-col.l2 {
+        width: 16.66666% /* Sets an element's width. */
+    }
+
+    .rb-col.l3 {
+        width: 24.99999% /* Sets an element's width. */
+    }
+
+    .rb-col.l4 {
+        width: 33.33333% /* Sets an element's width. */
+    }
+
+    .rb-col.l5 {
+        width: 41.66666% /* Sets an element's width. */
+    }
+
+    .rb-col.l6 {
+        width: 49.99999% /* Sets an element's width. */
+    }
+
+    .rb-col.l7 {
+        width: 58.33333% /* Sets an element's width. */
+    }
+
+    .rb-col.l8 {
+        width: 66.66666% /* Sets an element's width. */
+    }
+
+    .rb-col.l9 {
+        width: 74.99999% /* Sets an element's width. */
+    }
+
+    .rb-col.l10 {
+        width: 83.33333% /* Sets an element's width. */
+    }
+
+    .rb-col.l11 {
+        width: 91.66666% /* Sets an element's width. */
+    }
+
+    .rb-col.l12 {
+        width: 99.99999% /* Sets an element's width. */
+    }
+}
+
+.rb-rest {
+    overflow: hidden /* Sets the desired behavior when content does not fit in the element's padding box (overflows) in the horizontal and/or vertical direction. */
+}
+
+.rb-stretch {
+    margin-left: -16px; /* Sets the margin area on the left side of an element. Negative is closer, positive is further. */
+    margin-right: -16px; /* Sets the margin area on the right side of an element. Negative is closer, positive is further. */
+}
+
+.rb-content, .rb-auto {
+    margin-left: auto; /* Sets the margin area on the left side of an element. Negative is closer, positive is further. */
+    margin-right: auto; /* Sets the margin area on the right side of an element. Negative is closer, positive is further. */
+}
+
+.rb-content {
+    max-width: 980px; /* Sets the maximum width of the element. */
+}
+
+.rb-auto {
+    max-width: 1140px; /* Sets the maximum width of the element. */
+}
+
+.rb-cell-row {
+    display: table;/* Sets whether an element is treated as a block or inline box and the layout used for its children, such as flow layout, grid or flex. */
+    width: 100%; /* Sets an element's width. */
+}
+
+.rb-cell {
+    display: table-cell;/* Sets whether an element is treated as a block or inline box and the layout used for its children, such as flow layout, grid or flex. */
+}
+
+.rb-cell-top {
+    vertical-align: top; /* Aligns things vertically within the section. */
+}
+
+.rb-cell-middle {
+    vertical-align: middle; /* Aligns things vertically within the section. */
+}
+
+.rb-cell-bottom {
+    vertical-align: bottom; /* Aligns things vertically within the section. */
+}
+
+.rb-hide {
+    display: none !important;/* Sets whether an element is treated as a block or inline box and the layout used for its children, such as flow layout, grid or flex. */
+}
+
+.rb-show-block, .rb-show {
+    display: block !important;/* Sets whether an element is treated as a block or inline box and the layout used for its children, such as flow layout, grid or flex. */
+}
+
+.rb-show-inline-block {
+    display: inline-block !important;/* Sets whether an element is treated as a block or inline box and the layout used for its children, such as flow layout, grid or flex. */
+}
+
+@media (max-width: 1205px) { /* Sets the maximum width of the media element. */
+    .rb-auto {
+        max-width: 95%; /* Sets the maximum width of the element. */
+    }
+}
+
+@media (max-width: 600px) { /* Sets the maximum width of the media elements. */
+    .rb-modal-content {
+        margin: 0 10px; /* Sets the margin area on all four sides of an element. */
+        width: auto !important; /* Sets an element's width. */
+    }
+
+    .rb-modal {
+        padding-top: 30px; /* Sets the height of the padding area on the top of an element. */
+    }
+
+    .rb-dropdown-hover.rb-mobile .rb-dropdown-content, .rb-dropdown-click.rb-mobile .rb-dropdown-content {
+        position: relative; /* Sets how an element is positioned in a document. */
+    }
+
+    .rb-hide-small {
+        display: none !important; /* Sets whether an element is treated as a block or inline box and the layout used for its children, such as flow layout, grid or flex. */
+    }
+
+    .rb-mobile {
+        display: block; /* Sets whether an element is treated as a block or inline box and the layout used for its children, such as flow layout, grid or flex. */
+        width: 100% !important;/* Sets whether an element is treated as a block or inline box and the layout used for its children, such as flow layout, grid or flex. */
+    }
+
+    .rb-bar-item.rb-mobile, .rb-dropdown-hover.rb-mobile, .rb-dropdown-click.rb-mobile {
+        text-align: center /* Aligns the text within the section. */
+    }
+
+    .rb-dropdown-hover.rb-mobile, .rb-dropdown-hover.rb-mobile .rb-btn, .rb-dropdown-hover.rb-mobile .rb-button, .rb-dropdown-click.rb-mobile, .rb-dropdown-click.rb-mobile .rb-btn, .rb-dropdown-click.rb-mobile .rb-button {
+        width: 100% /* Sets an element's width. */
+    }
+}
+
+@media (max-width: 768px) { /* Sets the maximum width of the media elements. */
+    .rb-modal-content {
+        width: 500px /* Sets an element's width. */
+    }
+
+    .rb-modal {
+        padding-top: 50px /* Sets the height of the padding area on the top of an element. */
+    }
+}
+
+@media (min-width: 993px) { /* Sets the minimum width of the media element. */
+    .rb-modal-content {
+        width: 900px /* Sets an element's width. */
+    }
+
+    .rb-hide-large {
+        display: none !important /* Sets whether an element is treated as a block or inline box and the layout used for its children, such as flow layout, grid or flex. */
+    }
+
+    .rb-sidebar.rb-collapse {
+        display: block !important /* Sets whether an element is treated as a block or inline box and the layout used for its children, such as flow layout, grid or flex. */
+    }
+}
+
+@media (max-width: 992px) and (min-width: 601px) { /* Sets the maximum width and minimum width of the media elements that hide. */
+    .rb-hide-medium {
+        display: none !important /* Sets whether an element is treated as a block or inline box and the layout used for its children, such as flow layout, grid or flex. */
+    }
+}
+
+@media (max-width: 992px) {  /* Sets the maximum width of the media elements in the sidebar and collapsible areas. */
+    .rb-sidebar.rb-collapse {
+        display: none /* Sets whether an element is treated as a block or inline box and the layout used for its children, such as flow layout, grid or flex. */
+    }
+
+    .rb-main {
+        margin-left: 0 !important; /* Sets the margin area on the left side of an element. Negative is closer, positive is further. */
+        margin-right: 0 !important /* Sets the margin area on the right side of an element. Negative is closer, positive is further. */
+    }
+
+    .rb-auto {
+        max-width: 100% /* Sets the maximum width of the element. */
+    }
+}
+
+.rb-top, .rb-bottom {
+    position: fixed; /* Sets how an element is positioned in a document. */
+    width: 100%; /* Sets an element's width. */
+    z-index: 1 /* Sets the z-order of a positioned element and its descendants or flex and grid items. Overlapping elements with a larger z-index cover those with a smaller one. */
+}
+
+.rb-top {
+    top: 0 /* Sets the vertical position of a positioned element. */
+}
+
+.rb-bottom {
+    bottom: 0 /* Participates in setting the vertical position of a positioned element. */
+}
+
+.rb-overlay {
+    position: fixed; /* Sets how an element is positioned in a document. */
+    display: none;/* Sets whether an element is treated as a block or inline box and the layout used for its children, such as flow layout, grid or flex. */
+    width: 100%; /* Sets an element's width. */
+    height: 100%; /* Manually set the height of the element. */
+    top: 0; /* Sets the vertical position of a positioned element. */
+    left: 0; /* Participates in specifying the horizontal position of a positioned element. */
+    right: 0; /* Participates in specifying the horizontal position of a positioned element. It has no effect on non-positioned elements. */
+    bottom: 0; /* Participates in setting the vertical position of a positioned element. */
+    background-color: rgba(0, 0, 0, 0.5); /* Set the color of the background of the element. */
+    z-index: 2 /* Sets the z-order of a positioned element and its descendants or flex and grid items. Overlapping elements with a larger z-index cover those with a smaller one. */
+}
+
+.rb-display-topleft {
+    position: absolute; /* Sets how an element is positioned in a document. */
+    left: 0; /* Participates in specifying the horizontal position of a positioned element. */
+    top: 0 /* Sets the vertical position of a positioned element. */
+}
+
+.rb-display-topright {
+    position: absolute; /* Sets how an element is positioned in a document. */
+    right: 0; /* Participates in specifying the horizontal position of a positioned element. It has no effect on non-positioned elements. */
+    top: 0 /* Sets the vertical position of a positioned element. */
+}
+
+.rb-display-bottomleft {
+    position: absolute; /* Sets how an element is positioned in a document. */
+    left: 0; /* Participates in specifying the horizontal position of a positioned element. */
+    bottom: 0 /* Participates in setting the vertical position of a positioned element. */
+}
+
+.rb-display-bottomright {
+    position: absolute; /* Sets how an element is positioned in a document. */
+    right: 0; /* Participates in specifying the horizontal position of a positioned element. It has no effect on non-positioned elements. */
+    bottom: 0 /* Participates in setting the vertical position of a positioned element. */
+}
+
+.rb-display-middle {
+    position: absolute; /* Sets how an element is positioned in a document. */
+    top: 50%; /* Sets the vertical position of a positioned element. */
+    left: 50%; /* Participates in specifying the horizontal position of a positioned element. */
+    transform: translate(-50%, -50%); /* Lets you rotate, scale, skew, or translate an element. */
+    -ms-transform: translate(-50%, -50%) /* Lets you rotate, scale, skew, or translate an element. */
+}
+
+.rb-display-left {
+    position: absolute; /* Sets how an element is positioned in a document. */
+    top: 50%; /* Sets the vertical position of a positioned element. */
+    left: 0%; /* Participates in specifying the horizontal position of a positioned element. */
+    transform: translate(0%, -50%); /* Lets you rotate, scale, skew, or translate an element. */
+    -ms-transform: translate(-0%, -50%) /* Lets you rotate, scale, skew, or translate an element. */
+}
+
+.rb-display-right {
+    position: absolute; /* Sets how an element is positioned in a document. */
+    top: 50%; /* Sets the vertical position of a positioned element. */
+    right: 0%; /* Participates in specifying the horizontal position of a positioned element. It has no effect on non-positioned elements. */
+    transform: translate(0%, -50%); /* Lets you rotate, scale, skew, or translate an element. */
+    -ms-transform: translate(0%, -50%) /* Lets you rotate, scale, skew, or translate an element. */
+}
+
+.rb-display-topmiddle {
+    position: absolute; /* Sets how an element is positioned in a document. */
+    left: 50%; /* Participates in specifying the horizontal position of a positioned element. */
+    top: 0; /* Sets the vertical position of a positioned element. */
+    transform: translate(-50%, 0%); /* Lets you rotate, scale, skew, or translate an element. */
+    -ms-transform: translate(-50%, 0%) /* Lets you rotate, scale, skew, or translate an element. */
+}
+
+.rb-display-bottommiddle {
+    position: absolute; /* Sets how an element is positioned in a document. */
+    left: 50%; /* Participates in specifying the horizontal position of a positioned element. */
+    bottom: 0; /* Participates in setting the vertical position of a positioned element. */
+    transform: translate(-50%, 0%); /* Lets you rotate, scale, skew, or translate an element. */
+    -ms-transform: translate(-50%, 0%) /* Lets you rotate, scale, skew, or translate an element. */
+}
+
+.rb-display-container:hover .rb-display-hover {
+    display: block/* Sets whether an element is treated as a block or inline box and the layout used for its children, such as flow layout, grid or flex. */
+}
+
+.rb-display-container:hover span.rb-display-hover {
+    display: inline-block/* Sets whether an element is treated as a block or inline box and the layout used for its children, such as flow layout, grid or flex. */
+}
+
+.rb-display-hover {
+    display: none/* Sets whether an element is treated as a block or inline box and the layout used for its children, such as flow layout, grid or flex. */
+}
+
+.rb-display-position {
+    position: absolute /* Sets how an element is positioned in a document. */
+}
+
+.rb-circle {
+    border-radius: 50% /* Rounds the corners of an element's outer border edge. */
+}
+
+.rb-round-small {
+    border-radius: 2px /* Rounds the corners of an element's outer border edge. */
+}
+
+.rb-round, .rb-round-medium {
+    border-radius: 4px /* Rounds the corners of an element's outer border edge. */
+}
+
+.rb-round-large {
+    border-radius: 8px /* Rounds the corners of an element's outer border edge. */
+}
+
+.rb-round-xlarge {
+    border-radius: 16px /* Rounds the corners of an element's outer border edge. */
+}
+
+.rb-round-xxlarge {
+    border-radius: 32px /* Rounds the corners of an element's outer border edge. */
+}
+
+.rb-row-padding, .rb-row-padding > .rb-half, .rb-row-padding > .rb-third, .rb-row-padding > .rb-twothird, .rb-row-padding > .rb-threequarter, .rb-row-padding > .rb-quarter, .rb-row-padding > .rb-col {
+    padding: 0 8px /* Sets the padding area on all four sides of an element at once. */
+}
+
+.rb-container, .rb-panel {
+    padding: 0.01em 4px /* Sets the padding area on all four sides of an element at once. */
+}
+
+.rb-panel {
+    margin-top: 16px; /* Sets the margin area on the top of an element. Negative is closer, positive is further. */
+    margin-bottom: 16px /* Sets the margin area on the bottom of an element. Negative is closer, positive is further. */
+}
+
+.rb-code, .rb-codespan {
+    font-family: Consolas, "courier new"; /* Specifies a prioritized list of one or more font family names and/or generic family names for the selected element. */
+    font-size: 16px /* Sets the size of the font for this section. */
+}
+
+.rb-code {
+    width: auto; /* Sets an element's width. */
+    background-color: #fff; /* Set the color of the background of the element. */
+    padding: 8px 12px; /* Sets the padding area on all four sides of an element at once. */
+    border-left: 4px solid #4CAF50; /* Sets all the properties of an element's left border. */
+    word-wrap: break-word /* Sets the word wrap behavior for an element. */
+}
+
+.rb-codespan {
+    color: crimson; /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+    background-color: #f1f1f1; /* Set the color of the background of the element. */
+    padding-left: 4px; /* Sets the width of the padding area to the left of an element. */
+    padding-right: 4px; /* Sets the width of the padding area to the right of an element. */
+    font-size: 110% /* Sets the size of the font for this section. */
+}
+
+.rb-card, .rb-card-2 {
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12) /* Adds shadow effects around an element's frame. */
+}
+
+.rb-card-4, .rb-hover-shadow:hover {
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19) /* Adds shadow effects around an element's frame. */
+}
+
+.rb-spin {
+    animation: rb-spin 2s infinite linear /* applies an animation between styles. It is a shorthand for animation-name, animation-duration, animation-timing-function, animation-delay, animation-iteration-count, animation-direction, animation-fill-mode, animation-play-state, and animation-timeline. */
+}
+
+@keyframes rb-spin {
+    0% {
+        transform: rotate(0deg) /* Lets you rotate, scale, skew, or translate an element. */
+    }
+    100% {
+        transform: rotate(359deg) /* Lets you rotate, scale, skew, or translate an element. */
+    }
+}
+
+.rb-animate-fading {
+    animation: fading 10s infinite /* applies an animation between styles. It is a shorthand for animation-name, animation-duration, animation-timing-function, animation-delay, animation-iteration-count, animation-direction, animation-fill-mode, animation-play-state, and animation-timeline. */
+}
+
+@keyframes fading {
+    0% {
+        opacity: 0 /* Sets the opacity of an element (how see-through it is). */
+    }
+    50% {
+        opacity: 1 /* Sets the opacity of an element (how see-through it is). */
+    }
+    100% {
+        opacity: 0 /* Sets the opacity of an element (how see-through it is). */
+    }
+}
+
+.rb-animate-opacity {
+    animation: opac 0.8s /* applies an animation between styles. It is a shorthand for animation-name, animation-duration, animation-timing-function, animation-delay, animation-iteration-count, animation-direction, animation-fill-mode, animation-play-state, and animation-timeline. */
+}
+
+@keyframes opac {
+    from {
+        opacity: 0 /* Sets the opacity of an element (how see-through it is). */
+    }
+    to {
+        opacity: 1 /* Sets the opacity of an element (how see-through it is). */
+    }
+}
+
+.rb-animate-top {
+    position: relative; /* Sets how an element is positioned in a document. */
+    animation: animatetop 0.4s /* applies an animation between styles. It is a shorthand for animation-name, animation-duration, animation-timing-function, animation-delay, animation-iteration-count, animation-direction, animation-fill-mode, animation-play-state, and animation-timeline. */
+}
+
+@keyframes animatetop {
+    from {
+        top: -300px; /* Sets the vertical position of a positioned element. */
+        opacity: 0 /* Sets the opacity of an element (how see-through it is). */
+    }
+    to {
+        top: 0; /* Sets the vertical position of a positioned element. */
+        opacity: 1 /* Sets the opacity of an element (how see-through it is). */
+    }
+}
+
+.rb-animate-left {
+    position: relative; /* Sets how an element is positioned in a document. */
+    animation: animateleft 0.4s /* applies an animation between styles. It is a shorthand for animation-name, animation-duration, animation-timing-function, animation-delay, animation-iteration-count, animation-direction, animation-fill-mode, animation-play-state, and animation-timeline. */
+}
+
+@keyframes animateleft {
+    from {
+        left: -300px; /* Participates in specifying the horizontal position of a positioned element. */
+        opacity: 0 /* Sets the opacity of an element (how see-through it is). */
+    }
+    to {
+        left: 0; /* Participates in specifying the horizontal position of a positioned element. */
+        opacity: 1 /* Sets the opacity of an element (how see-through it is). */
+    }
+}
+
+.rb-animate-right {
+    position: relative; /* Sets how an element is positioned in a document. */
+    animation: animateright 0.4s /* applies an animation between styles. It is a shorthand for animation-name, animation-duration, animation-timing-function, animation-delay, animation-iteration-count, animation-direction, animation-fill-mode, animation-play-state, and animation-timeline. */
+}
+
+@keyframes animateright {
+    from {
+        right: -300px; /* Participates in specifying the horizontal position of a positioned element. It has no effect on non-positioned elements. */
+        opacity: 0 /* Sets the opacity of an element (how see-through it is). */
+    }
+    to {
+        right: 0; /* Participates in specifying the horizontal position of a positioned element. It has no effect on non-positioned elements. */
+        opacity: 1 /* Sets the opacity of an element (how see-through it is). */
+    }
+}
+
+.rb-animate-bottom {
+    position: relative; /* Sets how an element is positioned in a document. */
+    animation: animatebottom 0.4s /* applies an animation between styles. It is a shorthand for animation-name, animation-duration, animation-timing-function, animation-delay, animation-iteration-count, animation-direction, animation-fill-mode, animation-play-state, and animation-timeline. */
+}
+
+@keyframes animatebottom {
+    from {
+        bottom: -300px; /* Participates in setting the vertical position of a positioned element. */
+        opacity: 0 /* Sets the opacity of an element (how see-through it is). */
+    }
+    to {
+        bottom: 0; /* Participates in setting the vertical position of a positioned element. */
+        opacity: 1 /* Sets the opacity of an element (how see-through it is). */
+    }
+}
+
+.rb-animate-zoom {
+    animation: animatezoom 0.6s /* applies an animation between styles. It is a shorthand for animation-name, animation-duration, animation-timing-function, animation-delay, animation-iteration-count, animation-direction, animation-fill-mode, animation-play-state, and animation-timeline. */
+}
+
+@keyframes animatezoom {
+    from {
+        transform: scale(0) /* Lets you rotate, scale, skew, or translate an element. */
+    }
+    to {
+        transform: scale(1) /* Lets you rotate, scale, skew, or translate an element. */
+    }
+}
+
+.rb-animate-input {
+    transition: width 0.4s ease-in-out /* Shorthand property for transition-property, transition-duration, transition-timing-function, transition-delay, and transition-behavior. */
+}
+
+.rb-animate-input:focus {
+    width: 100% !important /* Sets an element's width. */
+}
+
+.rb-opacity, .rb-hover-opacity:hover {
+    opacity: 0.60 /* Sets the opacity of an element (how see-through it is). */
+}
+
+.rb-opacity-off, .rb-hover-opacity-off:hover {
+    opacity: 1 /* Sets the opacity of an element (how see-through it is). */
+}
+
+.rb-opacity-max {
+    opacity: 0.25 /* Sets the opacity of an element (how see-through it is). */
+}
+
+.rb-opacity-min {
+    opacity: 0.75 /* Sets the opacity of an element (how see-through it is). */
+}
+
+.rb-greyscale-max, .rb-grayscale-max, .rb-hover-greyscale:hover, .rb-hover-grayscale:hover {
+    filter: grayscale(100%) /* Applies graphical effects like blur or color shift to an element. Filters are commonly used to adjust the rendering of images, backgrounds, and borders. */
+}
+
+.rb-greyscale, .rb-grayscale {
+    filter: grayscale(75%) /* Applies graphical effects like blur or color shift to an element. Filters are commonly used to adjust the rendering of images, backgrounds, and borders. */
+}
+
+.rb-greyscale-min, .rb-grayscale-min {
+    filter: grayscale(50%) /* Applies graphical effects like blur or color shift to an element. Filters are commonly used to adjust the rendering of images, backgrounds, and borders. */
+}
+
+.rb-sepia {
+    filter: sepia(75%) /* Applies graphical effects like blur or color shift to an element. Filters are commonly used to adjust the rendering of images, backgrounds, and borders. */
+}
+
+.rb-sepia-max, .rb-hover-sepia:hover {
+    filter: sepia(100%) /* Applies graphical effects like blur or color shift to an element. Filters are commonly used to adjust the rendering of images, backgrounds, and borders. */
+}
+
+.rb-sepia-min {
+    filter: sepia(50%) /* Applies graphical effects like blur or color shift to an element. Filters are commonly used to adjust the rendering of images, backgrounds, and borders. */
+}
+
+.rb-tiny {
+    font-size: 10px !important /* Sets the size of the font for this section. */
+}
+
+.rb-small {
+    font-size: 12px !important /* Sets the size of the font for this section. */
+}
+
+.rb-medium {
+    font-size: 15px !important /* Sets the size of the font for this section. */
+}
+
+.rb-large {
+    font-size: 18px !important /* Sets the size of the font for this section. */
+}
+
+.rb-xlarge {
+    font-size: 24px !important /* Sets the size of the font for this section. */
+}
+
+.rb-xxlarge {
+    font-size: 36px !important /* Sets the size of the font for this section. */
+}
+
+.rb-xxxlarge {
+    font-size: 48px !important /* Sets the size of the font for this section. */
+}
+
+.rb-jumbo {
+    font-size: 48px !important /* Sets the size of the font for this section. */
+}
+
+.rb-left-align {
+    text-align: left !important /* Aligns the text within the section. */
+}
+
+.rb-right-align {
+    text-align: right !important /* Aligns the text within the section. */
+}
+
+.rb-justify {
+    text-align: justify !important /* Aligns the text within the section. */
+}
+
+.rb-center {
+    text-align: center !important; /* Aligns the text within the section. */
+}
+
+.rb-border-0 {
+    border: 0 !important /* Sets an element's border width, style and color. */
+}
+
+.rb-border {
+    border: 1px solid #ccc !important /* Sets an element's border width, style and color. */
+}
+
+.rb-border-top {
+    border-top: 1px solid #ccc !important /* Sets all the properties of an element's top border. */
+}
+
+.rb-border-bottom {
+    border-bottom: 1px solid #ccc !important /* Sets an element's bottom borders width, style and color. */
+}
+
+.rb-border-left {
+    border-left: 1px solid #ccc !important /* Sets all the properties of an element's left border. */
+}
+
+.rb-border-right {
+    border-right: 1px solid #ccc !important /* Sets all the properties of an element's right border. */
+}
+
+.rb-topbar {
+    border-top: 6px solid #ccc !important /* Sets all the properties of an element's top border. */
+}
+
+.rb-bottombar {
+    border-bottom: 6px solid #ccc !important /* Sets an element's bottom borders width, style and color. */
+}
+
+.rb-leftbar {
+    border-left: 6px solid #ccc !important /* Sets all the properties of an element's left border. */
+}
+
+.rb-rightbar {
+    border-right: 6px solid #ccc !important /* Sets all the properties of an element's right border. */
+}
+
+.rb-section, .rb-code {
+    margin-top: 16px !important; /* Sets the margin area on the top of an element. Negative is closer, positive is further. */
+    margin-bottom: 16px !important /* Sets the margin area on the bottom of an element. Negative is closer, positive is further. */
+}
+
+.rb-margin {
+    margin: 16px !important /* Sets the margin area on all four sides of an element. */
+}
+
+.rb-margin-top {
+    margin-top: 16px !important /* Sets the margin area on the top of an element. Negative is closer, positive is further. */
+}
+
+.rb-margin-bottom {
+    margin-bottom: 16px !important /* Sets the margin area on the bottom side of an element. Negative is closer, positive is further. */
+}
+
+.rb-margin-left {
+    margin-left: 16px !important /* Sets the margin area on the left side of an element. Negative is closer, positive is further. */
+}
+
+.rb-margin-right {
+    margin-right: 16px !important /* Sets the margin area on the right side of an element. Negative is closer, positive is further. */
+}
+
+.rb-padding-small {
+    padding: 4px 8px !important /* Sets the padding area on all four sides of an element at once. */
+}
+
+.rb-padding {
+    padding: 8px 16px !important /* Sets the padding area on all four sides of an element at once. */
+}
+
+.rb-padding-large {
+    padding: 12px 24px !important /* Sets the padding area on all four sides of an element at once. */
+}
+
+.rb-padding-16 {
+    padding-top: 16px !important; /* Sets the height of the padding area on the top of an element. */
+    padding-bottom: 16px !important /* Sets the height of the padding area on the bottom of an element. */
+}
+
+.rb-padding-24 {
+    padding-top: 24px !important; /* Sets the height of the padding area on the top of an element. */
+    padding-bottom: 24px !important /* Sets the height of the padding area on the bottom of an element. */
+}
+
+.rb-padding-32 {
+    padding-top: 32px !important; /* Sets the height of the padding area on the top of an element. */
+    padding-bottom: 32px !important /* Sets the height of the padding area on the bottom of an element. */
+}
+
+.rb-padding-48 {
+    padding-top: 48px !important; /* Sets the height of the padding area on the top of an element. */
+    padding-bottom: 48px !important /* Sets the height of the padding area on the bottom of an element. */
+}
+
+.rb-padding-64 {
+    padding-top: 64px !important; /* Sets the height of the padding area on the top of an element. */
+    padding-bottom: 64px !important /* Sets the height of the padding area on the bottom of an element. */
+}
+
+.rb-padding-top-64 {
+    padding-top: 64px !important /* Sets the height of the padding area on the top of an element. */
+}
+
+.rb-padding-top-48 {
+    padding-top: 48px !important /* Sets the height of the padding area on the top of an element. */
+}
+
+.rb-padding-top-32 {
+    padding-top: 32px !important /* Sets the height of the padding area on the top of an element. */
+}
+
+.rb-padding-top-24 {
+    padding-top: 24px !important /* Sets the height of the padding area on the top of an element. */
+}
+
+.rb-left {
+    float: left !important /* Places an element on the left or right side of its container, allowing text and inline elements to wrap around it. */
+}
+
+.rb-right {
+    float: right !important /* Places an element on the left or right side of its container, allowing text and inline elements to wrap around it. */
+}
+
+.rb-button:hover {
+    color: #000 !important; /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+    background-color: #ccc !important /* Set the color of the background of the element. */
+}
+
+.rb-transparent, .rb-hover-none:hover {
+    background-color: transparent !important /* Set the color of the background of the element. */
+}
+
+.rb-hover-none:hover {
+    box-shadow: none !important /* Adds shadow effects around an element's frame. */
+}
+
+/* Colors */
+.rb-amber, .rb-hover-amber:hover {
+    color: #000 !important; /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+    background-color: #ffc107 !important /* Set the color of the background of the element. */
+}
+
+.rb-aqua, .rb-hover-aqua:hover {
+    color: #000 !important; /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+    background-color: #00ffff !important /* Set the color of the background of the element. */
+}
+
+.rb-blue, .rb-hover-blue:hover {
+    color: #fff !important; /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+    background-color: #2196F3 !important /* Set the color of the background of the element. */
+}
+
+.rb-light-blue, .rb-hover-light-blue:hover {
+    color: #000 !important; /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+    background-color: #87CEEB !important /* Set the color of the background of the element. */
+}
+
+.rb-brown, .rb-hover-brown:hover {
+    color: #fff !important; /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+    background-color: #795548 !important /* Set the color of the background of the element. */
+}
+
+.rb-cyan, .rb-hover-cyan:hover {
+    color: #000 !important; /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+    background-color: #00bcd4 !important /* Set the color of the background of the element. */
+}
+
+.rb-blue-grey, .rb-hover-blue-grey:hover, .rb-blue-gray, .rb-hover-blue-gray:hover {
+    color: #fff !important; /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+    background-color: #607d8b !important /* Set the color of the background of the element. */
+}
+
+.rb-green, .rb-hover-green:hover {
+    color: #fff !important; /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+    background-color: #4CAF50 !important /* Set the color of the background of the element. */
+}
+
+.rb-light-green, .rb-hover-light-green:hover {
+    color: #000 !important; /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+    background-color: #8bc34a !important /* Set the color of the background of the element. */
+}
+
+.rb-indigo, .rb-hover-indigo:hover {
+    color: #fff !important; /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+    background-color: #3f51b5 !important /* Set the color of the background of the element. */
+}
+
+.rb-khaki, .rb-hover-khaki:hover {
+    color: #000 !important; /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+    background-color: #f0e68c !important /* Set the color of the background of the element. */
+}
+
+.rb-lime, .rb-hover-lime:hover {
+    color: #000 !important; /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+    background-color: #cddc39 !important /* Set the color of the background of the element. */
+}
+
+.rb-orange, .rb-hover-orange:hover {
+    color: #000 !important; /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+    background-color: #ff9800 !important /* Set the color of the background of the element. */
+}
+
+.rb-deep-orange, .rb-hover-deep-orange:hover {
+    color: #fff !important; /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+    background-color: #ff5722 !important /* Set the color of the background of the element. */
+}
+
+.rb-pink, .rb-hover-pink:hover {
+    color: #fff !important; /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+    background-color: #e91e63 !important /* Set the color of the background of the element. */
+}
+
+.rb-purple, .rb-hover-purple:hover {
+    color: #fff !important; /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+    background-color: #9c27b0 !important /* Set the color of the background of the element. */
+}
+
+.rb-deep-purple, .rb-hover-deep-purple:hover {
+    color: #fff !important; /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+    background-color: #673ab7 !important /* Set the color of the background of the element. */
+}
+
+.rb-red, .rb-hover-red:hover {
+    color: #fff !important; /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+    background-color: #7a0d0d !important /* Set the color of the background of the element. */
+}
+
+.rb-sand, .rb-hover-sand:hover {
+    color: #000 !important; /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+    background-color: #fdf5e6 !important /* Set the color of the background of the element. */
+}
+
+.rb-teal, .rb-hover-teal:hover {
+    color: #fff !important; /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+    background-color: #009688 !important /* Set the color of the background of the element. */
+}
+
+.rb-yellow, .rb-hover-yellow:hover {
+    color: #000 !important; /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+    background-color: #ffeb3b !important /* Set the color of the background of the element. */
+}
+
+.rb-white, .rb-hover-white:hover {
+    color: #000 !important; /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+    background-color: #fff !important /* Set the color of the background of the element. */
+}
+
+.rb-black, .rb-hover-black:hover {
+    color: #fff !important; /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+    background-color: #000 !important /* Set the color of the background of the element. */
+}
+
+.rb-grey, .rb-hover-grey:hover, .rb-gray, .rb-hover-gray:hover {
+    color: #000 !important; /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+    background-color: #9e9e9e !important /* Set the color of the background of the element. */
+}
+
+.rb-light-grey, .rb-hover-light-grey:hover, .rb-light-gray, .rb-hover-light-gray:hover {
+    color: #000 !important; /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+    background-color: #f1f1f1 !important /* Set the color of the background of the element. */
+}
+
+.rb-dark-grey, .rb-hover-dark-grey:hover, .rb-dark-gray, .rb-hover-dark-gray:hover {
+    color: #fff !important; /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+    background-color: #616161 !important /* Set the color of the background of the element. */
+}
+
+.rb-pale-red, .rb-hover-pale-red:hover {
+    color: #000 !important; /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+    background-color: #ffdddd !important /* Set the color of the background of the element. */
+}
+
+.rb-pale-green, .rb-hover-pale-green:hover {
+    color: #000 !important; /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+    background-color: #ddffdd !important /* Set the color of the background of the element. */
+}
+
+.rb-pale-yellow, .rb-hover-pale-yellow:hover {
+    color: #000 !important; /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+    background-color: #ffffcc !important /* Set the color of the background of the element. */
+}
+
+.rb-pale-blue, .rb-hover-pale-blue:hover {
+    color: #000 !important; /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+    background-color: #ddffff !important /* Set the color of the background of the element. */
+}
+
+.rb-text-amber, .rb-hover-text-amber:hover {
+    color: #ffc107 !important /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+}
+
+.rb-text-aqua, .rb-hover-text-aqua:hover {
+    color: #00ffff !important /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+}
+
+.rb-text-blue, .rb-hover-text-blue:hover {
+    color: #2196F3 !important /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+}
+
+.rb-text-light-blue, .rb-hover-text-light-blue:hover {
+    color: #87CEEB !important /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+}
+
+.rb-text-brown, .rb-hover-text-brown:hover {
+    color: #795548 !important /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+}
+
+.rb-text-cyan, .rb-hover-text-cyan:hover {
+    color: #00bcd4 !important /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+}
+
+.rb-text-blue-grey, .rb-hover-text-blue-grey:hover, .rb-text-blue-gray, .rb-hover-text-blue-gray:hover {
+    color: #607d8b !important /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+}
+
+.rb-text-green, .rb-hover-text-green:hover {
+    color: #4CAF50 !important /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+}
+
+.rb-text-light-green, .rb-hover-text-light-green:hover {
+    color: #8bc34a !important /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+}
+
+.rb-text-indigo, .rb-hover-text-indigo:hover {
+    color: #3f51b5 !important /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+}
+
+.rb-text-khaki, .rb-hover-text-khaki:hover {
+    color: #b4aa50 !important /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+}
+
+.rb-text-lime, .rb-hover-text-lime:hover {
+    color: #cddc39 !important /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+}
+
+.rb-text-orange, .rb-hover-text-orange:hover {
+    color: #ff9800 !important /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+}
+
+.rb-text-deep-orange, .rb-hover-text-deep-orange:hover {
+    color: #ff5722 !important /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+}
+
+.rb-text-pink, .rb-hover-text-pink:hover {
+    color: #e91e63 !important /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+}
+
+.rb-text-purple, .rb-hover-text-purple:hover {
+    color: #9c27b0 !important /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+}
+
+.rb-text-deep-purple, .rb-hover-text-deep-purple:hover {
+    color: #673ab7 !important /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+}
+
+.rb-text-red, .rb-hover-text-red:hover {
+    color: #7a0d0d !important /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+}
+
+.rb-text-sand, .rb-hover-text-sand:hover {
+    color: #fdf5e6 !important /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+}
+
+.rb-text-teal, .rb-hover-text-teal:hover {
+    color: #009688 !important /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+}
+
+.rb-text-yellow, .rb-hover-text-yellow:hover {
+    color: #d2be0e !important /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+}
+
+.rb-text-white, .rb-hover-text-white:hover {
+    color: #fff !important /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+}
+
+.rb-text-black, .rb-hover-text-black:hover {
+    color: #000 !important /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+}
+
+.rb-text-grey, .rb-hover-text-grey:hover, .rb-text-gray, .rb-hover-text-gray:hover {
+    color: #757575 !important /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+}
+
+.rb-text-light-grey, .rb-hover-text-light-grey:hover, .rb-text-light-gray, .rb-hover-text-light-gray:hover {
+    color: #f1f1f1 !important /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+}
+
+.rb-text-dark-grey, .rb-hover-text-dark-grey:hover, .rb-text-dark-gray, .rb-hover-text-dark-gray:hover {
+    color: #3a3a3a !important /* Sets the foreground color value of an element's text and text decorations, and sets the currentcolor value. */
+}
+
+.rb-border-amber, .rb-hover-border-amber:hover {
+    border-color: #ffc107 !important /* Sets the color of an element's border. */
+}
+
+.rb-border-aqua, .rb-hover-border-aqua:hover {
+    border-color: #00ffff !important /* Sets the color of an element's border. */
+}
+
+.rb-border-blue, .rb-hover-border-blue:hover {
+    border-color: #2196F3 !important /* Sets the color of an element's border. */
+}
+
+.rb-border-light-blue, .rb-hover-border-light-blue:hover {
+    border-color: #87CEEB !important /* Sets the color of an element's border. */
+}
+
+.rb-border-brown, .rb-hover-border-brown:hover {
+    border-color: #795548 !important /* Sets the color of an element's border. */
+}
+
+.rb-border-cyan, .rb-hover-border-cyan:hover {
+    border-color: #00bcd4 !important /* Sets the color of an element's border. */
+}
+
+.rb-border-blue-grey, .rb-hover-border-blue-grey:hover, .rb-border-blue-gray, .rb-hover-border-blue-gray:hover {
+    border-color: #607d8b !important /* Sets the color of an element's border. */
+}
+
+.rb-border-green, .rb-hover-border-green:hover {
+    border-color: #4CAF50 !important /* Sets the color of an element's border. */
+}
+
+.rb-border-light-green, .rb-hover-border-light-green:hover {
+    border-color: #8bc34a !important /* Sets the color of an element's border. */
+}
+
+.rb-border-indigo, .rb-hover-border-indigo:hover {
+    border-color: #3f51b5 !important /* Sets the color of an element's border. */
+}
+
+.rb-border-khaki, .rb-hover-border-khaki:hover {
+    border-color: #f0e68c !important /* Sets the color of an element's border. */
+}
+
+.rb-border-lime, .rb-hover-border-lime:hover {
+    border-color: #cddc39 !important /* Sets the color of an element's border. */
+}
+
+.rb-border-orange, .rb-hover-border-orange:hover {
+    border-color: #ff9800 !important /* Sets the color of an element's border. */
+}
+
+.rb-border-deep-orange, .rb-hover-border-deep-orange:hover {
+    border-color: #ff5722 !important /* Sets the color of an element's border. */
+}
+
+.rb-border-pink, .rb-hover-border-pink:hover {
+    border-color: #e91e63 !important /* Sets the color of an element's border. */
+}
+
+.rb-border-purple, .rb-hover-border-purple:hover {
+    border-color: #9c27b0 !important /* Sets the color of an element's border. */
+}
+
+.rb-border-deep-purple, .rb-hover-border-deep-purple:hover {
+    border-color: #673ab7 !important /* Sets the color of an element's border. */
+}
+
+.rb-border-red, .rb-hover-border-red:hover {
+    border-color: #7a0d0d !important /* Sets the color of an element's border. */
+}
+
+.rb-border-sand, .rb-hover-border-sand:hover {
+    border-color: #fdf5e6 !important /* Sets the color of an element's border. */
+}
+
+.rb-border-teal, .rb-hover-border-teal:hover {
+    border-color: #009688 !important /* Sets the color of an element's border. */
+}
+
+.rb-border-yellow, .rb-hover-border-yellow:hover {
+    border-color: #ffeb3b !important /* Sets the color of an element's border. */
+}
+
+.rb-border-white, .rb-hover-border-white:hover {
+    border-color: #fff !important /* Sets the color of an element's border. */
+}
+
+.rb-border-black, .rb-hover-border-black:hover {
+    border-color: #000 !important /* Sets the color of an element's border. */
+}
+
+.rb-border-grey, .rb-hover-border-grey:hover, .rb-border-gray, .rb-hover-border-gray:hover {
+    border-color: #9e9e9e !important /* Sets the color of an element's border. */
+}
+
+.rb-border-light-grey, .rb-hover-border-light-grey:hover, .rb-border-light-gray, .rb-hover-border-light-gray:hover {
+    border-color: #f1f1f1 !important /* Sets the color of an element's border. */
+}
+
+.rb-border-dark-grey, .rb-hover-border-dark-grey:hover, .rb-border-dark-gray, .rb-hover-border-dark-gray:hover {
+    border-color: #616161 !important /* Sets the color of an element's border. */
+}
+
+.rb-border-pale-red, .rb-hover-border-pale-red:hover {
+    border-color: #ffe7e7 !important /* Sets the color of an element's border. */
+}
+
+.rb-border-pale-green, .rb-hover-border-pale-green:hover {
+    border-color: #e7ffe7 !important /* Sets the color of an element's border. */
+}
+
+.rb-border-pale-yellow, .rb-hover-border-pale-yellow:hover {
+    border-color: #ffffcc !important /* Sets the color of an element's border. */
+}
+
+.rb-border-pale-blue, .rb-hover-border-pale-blue:hover {
+    border-color: #e7ffff !important /* Sets the color of an element's border. */
+}
+
+.rb-book-page-link {
+    color: blue;
+}
+
+.rb-book-page-link:hover {
+    color: darkred;
+}

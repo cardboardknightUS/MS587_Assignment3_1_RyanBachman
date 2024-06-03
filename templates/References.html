@@ -1,0 +1,60 @@
+<!-- Ryan Bachman
+     University of Advancing Technology
+     MS587, Databases and Web Development
+     Summer 2024, Grad 1
+     Assignment 3.1 - Your eBook and Audiobook Web Application with Flask -->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head> <!-- Create the heading details of the page, including settings content widths and adding stylesheets -->
+        <title>Reference Page</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/stylesheets.css') }}">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        <!-- Navbar -->
+        <!-- Creates the navigation bar. This will change colors dependent on the page the user has selected. -->
+        <div class="rb-top">
+          <div class="rb-bar rb-blue rb-card rb-left-align rb-large">
+            <a class="rb-bar-item rb-button rb-hide-medium rb-hide-large rb-right rb-padding-large rb-hover-white rb-large rb-blue" href="javascript:void(0);" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+            <a href="/" class="rb-bar-item rb-button rb-hide-small rb-padding-large rb-hover-white">Home</a>
+            <a href="/second" class="rb-bar-item rb-button rb-hide-small rb-padding-large rb-hover-white">Book Catalogue</a>
+              <a href="/third" class="rb-bar-item rb-button rb-padding-large rb-white">References</a>
+          </div>
+
+          <!-- Navbar on small screens -->
+          <div id="navDemo" class="rb-bar-block rb-white rb-hide rb-hide-large rb-hide-medium rb-large">
+            <a href="/second" class="rb-bar-item rb-button rb-padding-large">Book Catalogue</a>
+              <a href="/third" class="rb-bar-item rb-button rb-padding-large">References</a>
+          </div>
+        </div>
+
+        <!-- Header -->
+        <!-- Differs from HEAD. This is a header field that shows the website overall name and my details. -->
+        <header class="rb-container rb-blue rb-center" style="padding:30px 4px 4px 4px">
+          <h1 class="rb-margin rb-jumbo">Your eBook and Audiobook Web Application with Flask</h1>
+          <p class="rb-xlarge">Ryan Bachman, MS587</p>
+        </header>
+
+        <!-- Dropped Grid structure for references. Will show all my references with direct links that open in new tabs -->
+        <div class="rb-row-padding rb-padding-64 rb-container">
+          <div class="rb-content">
+              <h1>References</h1>
+              <p>All images were generated with AI using ImageFX from Google. <a href="https://aitestkitchen.withgoogle.com/tools/image-fx" target="_blank">https://aitestkitchen.withgoogle.com/tools/image-fx</a></p>
+              <p>All book names, summaries and text were generated with AI using ChatGPT from OpenAI. <a href="https://chatgpt.com/" target="_blank">https://chatgpt.com/</a></p>
+              <p>JetBrains. (2024, May 9). Creating web applications with flask: Pycharm. PyCharm Help. <a href="https://www.jetbrains.com/help/pycharm/creating-web-application-with-flask.html" target="_blank">https://www.jetbrains.com/help/pycharm/creating-web-application-with-flask.html</a> </p>
+              <p>Bhat, N. M. (2017). Using pyttsx3. Using pyttsx3 - pyttsx3 2.6 documentation. <a href="https://pyttsx3.readthedocs.io/en/latest/engine.html" target="_blank">https://pyttsx3.readthedocs.io/en/latest/engine.html</a></p>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <!-- Creates a small footer at the bottom of the page with my name and class details. -->
+        <footer class="rb-container rb-padding-64 rb-center rb-opacity">
+         <p>Ryan Bachman, University of Advancing Technology, MS587, Databases and Web Development</p>
+        </footer>
+    </body>
+</html>
